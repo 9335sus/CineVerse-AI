@@ -1,0 +1,19 @@
+# Render Blueprint: New > Blueprint > pick this repo. Secrets marked sync:false are entered in the dashboard.
+services:
+  - type: web
+    name: cineverse-api
+    runtime: node
+    rootDir: server
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/v1/health
+    envVars:
+      - { key: NODE_ENV, value: production }
+      - { key: CLIENT_URL, sync: false }        # https://<your-app>.vercel.app (comma-separate for several)
+      - { key: MONGO_URI, sync: false }
+      - { key: JWT_ACCESS_SECRET, generateValue: true }
+      - { key: JWT_REFRESH_SECRET, generateValue: true }
+      - { key: TMDB_READ_TOKEN, sync: false }
+      - { key: AI_PROVIDER, value: none }       # anthropic | openai | none
+      - { key: AI_API_KEY, sync: false }
+      - { key: AI_MODEL, value: claude-sonnet-5-5 }

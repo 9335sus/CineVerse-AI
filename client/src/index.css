@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: 247 245 252; --surface: 255 255 255; --raised: 240 236 250; --line: 221 214 240;
+  --ink: 24 16 40; --muted: 104 94 130; --accent: 109 40 217; --glow: 139 92 246;
+}
+.dark {
+  --bg: 10 7 16; --surface: 19 14 30; --raised: 30 22 48; --line: 48 38 74;
+  --ink: 240 236 250; --muted: 150 140 175; --accent: 167 139 250; --glow: 124 58 237;
+}
+@layer base {
+  body { @apply bg-bg text-ink font-sans antialiased; }
+  h1, h2, h3 { @apply font-display tracking-tight; }
+  :focus-visible { @apply outline-2 outline-offset-2 outline-accent; }
+}
+@layer components {
+  .btn { @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium transition disabled:opacity-50 disabled:cursor-not-allowed; }
+  .btn-primary { @apply btn bg-glow text-white hover:brightness-110; }
+  .btn-ghost { @apply btn border border-line bg-surface text-ink hover:bg-raised; }
+  .input { @apply w-full rounded-lg border border-line bg-surface px-3 py-2.5 text-sm text-ink placeholder:text-muted focus:border-accent focus:outline-none; }
+  .label { @apply mb-1.5 block text-sm font-medium text-muted; }
+}
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.skeleton { background: linear-gradient(90deg, rgb(var(--raised)) 25%, rgb(var(--line)) 50%, rgb(var(--raised)) 75%); background-size: 200% 100%; animation: shimmer 1.4s infinite; }
+@keyframes shimmer { to { background-position: -200% 0; } }
+@media (prefers-reduced-motion: reduce) { .skeleton { animation: none; } * { scroll-behavior: auto !important; } }

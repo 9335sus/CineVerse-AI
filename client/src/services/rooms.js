@@ -1,0 +1,10 @@
+import api from './api';
+const d = (r) => r.data;
+export const listRooms = () => api.get('/rooms').then((r) => d(r).rooms);
+export const createRoom = (name) => api.post('/rooms', { name }).then((r) => d(r).room);
+export const joinRoom = (code) => api.post('/rooms/join', { code }).then((r) => d(r).room);
+export const getRoom = (code) => api.get(`/rooms/${code}`).then((r) => d(r).room);
+export const savePreferences = (code, body) => api.put(`/rooms/${code}/preferences`, body).then((r) => d(r).room);
+export const generatePicks = (code) => api.post(`/rooms/${code}/recommendations`).then((r) => d(r).room);
+export const decideRoom = (code) => api.post(`/rooms/${code}/decide`).then((r) => d(r).room);
+export const deleteRoom = (code) => api.delete(`/rooms/${code}`);

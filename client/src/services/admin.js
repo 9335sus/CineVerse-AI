@@ -1,0 +1,11 @@
+import api from './api';
+const g = (url, params) => api.get(`/admin${url}`, { params }).then((r) => r.data);
+export const getOverview = () => g('/analytics');
+export const getAiUsage = () => g('/ai-usage');
+export const getUsers = (params) => g('/users', params);
+export const updateUser = (id, body) => api.patch(`/admin/users/${id}`, body).then((r) => r.data.user);
+export const getReviews = (params) => g('/reviews', params);
+export const updateReview = (id, isHidden) => api.patch(`/admin/reviews/${id}`, { isHidden });
+export const deleteReview = (id) => api.delete(`/admin/reviews/${id}`);
+export const getReports = (params) => g('/reports', params);
+export const resolveReport = (id, action, note) => api.patch(`/admin/reports/${id}`, { action, note });

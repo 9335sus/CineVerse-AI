@@ -1,0 +1,13 @@
+import api from './api';
+export const getList = (category, page = 1) => api.get(`/movies/list/${category}`, { params: { page } }).then((r) => r.data);
+export const searchMovies = (params) => api.get('/movies/search', { params }).then((r) => r.data);
+export const getGenres = () => api.get('/movies/genres').then((r) => r.data.genres);
+export const getMovie = (id) => api.get(`/movies/${id}`).then((r) => r.data.movie);
+export const getLibrary = (status, page = 1) => api.get('/watchlist', { params: { status, page } }).then((r) => r.data);
+export const getLibraryStatus = (id) => api.get(`/watchlist/${id}`).then((r) => r.data);
+export const setLibrary = (id, body) => api.put(`/watchlist/${id}`, body).then((r) => r.data);
+export const getReviews = (id, page = 1) => api.get(`/reviews/movie/${id}`, { params: { page } }).then((r) => r.data);
+export const saveReview = (id, body) => api.put(`/reviews/movie/${id}`, body).then((r) => r.data.review);
+export const deleteReview = (id) => api.delete(`/reviews/${id}`);
+export const getUpcoming = (params) => api.get('/movies/upcoming', { params }).then((r) => r.data);
+export const getProviders = (id, region) => api.get(`/movies/${id}/providers`, { params: { region } }).then((r) => r.data);
